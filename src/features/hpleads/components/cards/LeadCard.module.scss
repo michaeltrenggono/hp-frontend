@@ -1,0 +1,67 @@
+.leadCardContainer {
+  min-width: 300px;
+  margin-bottom: 30px;
+  color: #6D6D6D;
+
+  :global {
+    .card {
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+    }
+  }
+
+  .header,
+  .summary,
+  .customerContact,
+  .cta {
+    display: flex;
+    align-items: center;
+
+    > * {
+      margin-right: 20px;
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+
+  .summary {
+    flex-direction: column;
+    align-items: flex-start;
+
+    > * {
+      margin-bottom: 10px;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+
+    @media only screen and (min-width: 481px) {
+      flex-direction: row;
+      align-items: center;
+
+      > * {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  .customerContact {
+    margin-bottom: 15px;
+  }
+
+  .cta {
+    .accept {
+      background-color: #ff7a12;
+      color: white;
+      font-weight: bold;
+    }
+
+    .decline {
+      background-color: #eeeeee;
+      color: inherit;
+      font-weight: bold;
+    }
+  }
+}

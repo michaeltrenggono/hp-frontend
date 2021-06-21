@@ -1,0 +1,21 @@
+.buttonStrip {
+  position: relative;
+
+  button {
+    background: transparent;
+    color: inherit;
+    font-weight: inherit;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .bottomStrip {
+    height: 3px;
+    background: rgba(0,0,0,0.3);
+    position: absolute;
+    border: 0;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+  }
+}

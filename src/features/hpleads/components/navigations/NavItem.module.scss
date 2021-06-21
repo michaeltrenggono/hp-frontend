@@ -1,0 +1,27 @@
+.navItem {
+  flex: 0 0 50%;
+  max-width: 50%;
+  text-align: center;
+  padding: 12px 10px;
+  font-weight: bold;
+  position: relative;
+  text-decoration: none !important;
+  color: #6D6D6D !important;
+
+  &.active {
+    &::after {
+      content: "";
+      height: 3px;
+      background: #ff7a12;
+      position: absolute;
+      border: 0;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+    }
+  }
+
+  a {
+    color: inherit;
+  }
+}
