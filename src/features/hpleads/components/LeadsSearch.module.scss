@@ -1,7 +1,28 @@
 .leadsSearch {
   margin-bottom: 30px;
 
-  input {
+  .input {
+    flex: 0 0 100%;
     flex-grow: 1;
+
+    @media only screen and (min-width: 768px)  {
+      flex: 1 1 auto;
+    }
+  }
+
+  .control {
+    flex: 0 0 100%;
+    margin-left: 0;
+    margin-top: 5px;
+
+    button {
+      flex-grow: 1;
+      border-radius: 0;
+    }
+
+    @media only screen and (min-width: 1024px)  {
+      margin-left: -1px;
+      flex: 0 0 auto;
+    }
   }
 }

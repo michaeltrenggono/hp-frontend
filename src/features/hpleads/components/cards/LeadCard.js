@@ -1,4 +1,4 @@
-import React, {useCallback} from "react";
+import React, {useCallback, Fragment} from "react";
 import {useDispatch} from "react-redux";
 import styles from "./LeadCard.module.scss";
 import {LeadCardRow} from "./LeadCardRow";
@@ -66,21 +66,20 @@ export const LeadCard = ({className, lead}) => {
                     </LeadCardRow>
 
                     {lead.status === LEAD_INVITED && (
-                        <LeadCardRow className="d-md-none">
-                            <strong>{formatPrice(lead.price)}</strong> Lead Invitation
-                        </LeadCardRow>
-                    )}
-
-                    {lead.status === LEAD_INVITED && (
-                        <LeadCardRow>
-                            <div className={`d-flex align-items-center cta ${styles.cta}`}>
-                                <ButtonStrip label="Accept" className={styles.accept} onClick={() => updateLead(LEAD_ACCEPTED)}/>
-                                <ButtonStrip label="Decline" className={styles.decline} onClick={() => updateLead("Declined")}/>
-                                <span className="d-none d-md-inline">
+                        <Fragment>
+                            <LeadCardRow className="d-md-none">
+                                <strong>{formatPrice(lead.price)}</strong> Lead Invitation
+                            </LeadCardRow>
+                            <LeadCardRow>
+                                <div className={`d-flex align-items-center cta ${styles.cta}`}>
+                                    <ButtonStrip label="Accept" className={styles.accept} onClick={() => updateLead(LEAD_ACCEPTED)}/>
+                                    <ButtonStrip label="Decline" className={styles.decline} onClick={() => updateLead("Declined")}/>
+                                    <span className="d-none d-md-inline">
                                     <strong>{formatPrice(lead.price)}</strong> Lead Invitation
                                 </span>
-                            </div>
-                        </LeadCardRow>
+                                </div>
+                            </LeadCardRow>
+                        </Fragment>
                     )}
                 </div>
             </div>

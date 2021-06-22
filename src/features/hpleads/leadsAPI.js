@@ -1,38 +1,17 @@
 import axios from "axios";
-import {ENDPOINT_ROOT, HP_PERFORMANCE_MODE, HP_PERFORMANCE_STORAGE_TIME} from "../../constants";
-import {getCurrentTime} from "../../helpers";
+import {ENDPOINT_ROOT} from "../../constants";
 
-export const fetchLeads = (status= 'Invited', countryCode = 'au') => {
+export const fetchLeads = (status= 'Invited') => {
     const fetchUrl = `${ENDPOINT_ROOT}leads`;
-
-    if (HP_PERFORMANCE_MODE) {
-        let leads = localStorage.getItem(countryCode);
-
-        if (leads) {
-            leads = JSON.parse(leads);
-            if ((getCurrentTime() - leads.lastFetch) < (HP_PERFORMANCE_STORAGE_TIME * 60000)) {
-                return leads;
-            }
-        }
-    }
 
     return axios.post(fetchUrl, {
         status
     })
         .then(function (response) {
-            if (HP_PERFORMANCE_MODE) {
-                localStorage.setItem(countryCode, JSON.stringify({...response.data, lastFetch: getCurrentTime()}));
-            }
             return response.data;
         })
         .catch(function (error) {
-            if (HP_PERFORMANCE_MODE) {
-                const leads = localStorage.getItem(countryCode);
-
-                if (leads) {
-                    return JSON.parse(leads);
-                }
-            }
+            alert(`Error fetching leads: ${error}`);
         });
 };
 
@@ -46,6 +25,6 @@ export const updateLeadStatusWithId = (id, status = "Accepted") => {
             return response.data.id;
         })
         .catch(function (error) {
-            alert(`Error updating lead: ${id}`)
+            alert(`Error updating lead ${id}: ${error}`);
         });
 };

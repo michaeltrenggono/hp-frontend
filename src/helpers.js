@@ -1,10 +1,5 @@
 import moment from "moment";
 
-export const getCurrentTime = () => {
-    const today = new Date();
-    return today.getTime();
-};
-
 export const formatPrice = (price) => `$${parseInt(price).toFixed(2)}`;
 
 export const formatDateTime = (dateTime) => {
