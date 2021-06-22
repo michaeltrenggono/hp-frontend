@@ -1,9 +1,9 @@
 import axios from "axios";
-import {HP_PERFORMANCE_MODE, HP_PERFORMANCE_STORAGE_TIME} from "../../constants";
+import {ENDPOINT_ROOT, HP_PERFORMANCE_MODE, HP_PERFORMANCE_STORAGE_TIME} from "../../constants";
 import {getCurrentTime} from "../../helpers";
 
-export const fetchLeads = (countryCode = 'au') => {
-    const fetchUrl = "http://localhost:8000/api/leads";
+export const fetchLeads = (status= 'Invited', countryCode = 'au') => {
+    const fetchUrl = `${ENDPOINT_ROOT}leads`;
 
     if (HP_PERFORMANCE_MODE) {
         let leads = localStorage.getItem(countryCode);
@@ -16,7 +16,9 @@ export const fetchLeads = (countryCode = 'au') => {
         }
     }
 
-    return axios.get(fetchUrl)
+    return axios.post(fetchUrl, {
+        status
+    })
         .then(function (response) {
             if (HP_PERFORMANCE_MODE) {
                 localStorage.setItem(countryCode, JSON.stringify({...response.data, lastFetch: getCurrentTime()}));
@@ -35,7 +37,7 @@ export const fetchLeads = (countryCode = 'au') => {
 };
 
 export const updateLeadStatusWithId = (id, status = "Accepted") => {
-    let targetUrl = `http://localhost:8000/api/leads/update/${id}`;
+    let targetUrl = `${ENDPOINT_ROOT}leads/update/${id}`;
 
     return axios.post(targetUrl, {
         status,

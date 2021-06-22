@@ -1,5 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`Should render leadCard and match snapshot should render LeadCard correctly 1`] = `ShallowWrapper {}`;
-
-exports[`Should render leadCard and match snapshot should render LeadCard correctly when Accepted 1`] = `ShallowWrapper {}`;

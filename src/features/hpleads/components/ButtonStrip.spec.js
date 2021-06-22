@@ -1,13 +1,14 @@
 import React from 'react';
-import { shallow } from 'enzyme';
-import {ButtonStrip} from './ButtonStrip';
+import { ButtonStrip } from "./ButtonStrip";
+import {fireEvent, render, screen} from "@testing-library/react";
 
-describe('Test ButtonStrip component', () => {
-    it('should handle onClick event', () => {
-        const mockCallBack = jest.fn();
+test('Click on the button', () => {
+    const onClickMock = jest.fn();
 
-        const button = shallow(<ButtonStrip onClick={mockCallBack} label="test"/>);
-        button.find('.buttonStrip').simulate('click');
-        expect(mockCallBack.mock.calls.length).toEqual(1);
-    });
+    render(<ButtonStrip label="test" onClick={onClickMock}/>);
+
+    expect(screen.queryByText("test")).toBeInTheDocument();
+    fireEvent.click(screen.queryByText('test'));
+
+    expect(onClickMock).toHaveBeenCalled();
 });

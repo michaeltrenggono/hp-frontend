@@ -5,31 +5,32 @@ import {
 } from "./leadsSlice";
 import styles from "./Leads.module.scss";
 import {LeadsList} from "./components/LeadsList";
+import {LeadsSearch} from "./components/LeadsSearch";
 
 export const Leads = ({leadStatus}) => {
     const leads = useSelector(selectAllLeads);
     const status = useSelector(selectStatus);
     const dispatch = useDispatch();
 
-    const fetchLatestLeads = useCallback(() => {
-        dispatch(fetchLeadsAsync());
+    const fetchLatestLeads = useCallback((status) => {
+        dispatch(fetchLeadsAsync(status));
     }, [dispatch]);
 
     useEffect(() => {
-        fetchLatestLeads();
-    }, [fetchLatestLeads]);
+        fetchLatestLeads(leadStatus);
+    }, [fetchLatestLeads, leadStatus]);
 
-    const render = () => {
-        return (
-            <div className={styles.leads}>
-                <div className="container">
-                    {(leads.length > 0 && status !== "loading") && (
-                        <LeadsList leads={leads} leadStatus={leadStatus}/>
-                    )}
+    return (
+        <div className={styles.leads}>
+            <div className="container">
+                <div className="col-12">
+                    <LeadsSearch/>
                 </div>
-            </div>
-        );
-    };
 
-    return render();
+                {(Array.isArray(leads) && leads.length > 0 && status !== "loading") && (
+                    <LeadsList leads={leads} leadStatus={leadStatus}/>
+                )}
+            </div>
+        </div>
+    );
 };
